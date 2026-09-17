@@ -1,0 +1,105 @@
+﻿$date
+    2026-07-16
+$end
+$version
+    VHDL 16-to-1 Multiplexer testbench waveform
+$end
+$timescale 1ns $end
+$scope module testbench $end
+$var wire 1 ! y $end
+$var reg 1 " s0 $end
+$var reg 1 # s1 $end
+$var reg 1 $ s2 $end
+$var reg 1 % s3 $end
+$var reg 1 & d0 $end
+$var reg 1 ' d1 $end
+$var reg 1 ( d2 $end
+$var reg 1 ) d3 $end
+$var reg 1 * d4 $end
+$var reg 1 + d5 $end
+$var reg 1 , d6 $end
+$var reg 1 - d7 $end
+$var reg 1 . d8 $end
+$var reg 1 / d9 $end
+$var reg 1 0 d10 $end
+$var reg 1 1 d11 $end
+$var reg 1 2 d12 $end
+$var reg 1 3 d13 $end
+$var reg 1 4 d14 $end
+$var reg 1 5 d15 $end
+$upscope $end
+$enddefinitions $end
+$dumpvars
+1!
+0"
+0#
+0$
+0%
+1&
+1'
+0(
+0)
+1*
+0+
+1,
+0-
+0.
+0/
+10
+11
+02
+13
+04
+15
+$end
+#10
+1"
+#20
+0"
+1#
+0!
+#30
+1"
+#40
+0"
+0#
+1$
+1!
+#50
+1"
+0!
+#60
+0"
+1#
+1!
+#70
+1"
+#80
+0"
+0#
+0$
+1%
+#90
+1"
+#100
+0"
+1#
+1!
+#110
+1"
+#120
+0"
+0#
+1$
+0!
+#130
+1"
+1!
+#140
+0"
+1#
+0!
+#150
+1"
+1!
+#160

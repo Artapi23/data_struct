@@ -1,0 +1,7 @@
+v 4
+file . "tb_encoder_decoder_7segment.vhd" "eba6e99b0e2085a90e9c79af1d3f211f405f89a8" "20260901042300.737":
+  entity tb_encoder_decoder_7segment at 1( 0) + 0 on 25;
+  architecture tb of tb_encoder_decoder_7segment at 7( 129) + 0 on 26;
+file . "7segment.vhd" "26a89d2a1867d69d4478b658466e62a5a24e137c" "20260901042257.256":
+  entity seven_segment at 1( 0) + 0 on 23;
+  architecture behavioral of seven_segment at 27( 547) + 0 on 24;
