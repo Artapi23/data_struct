@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdbool.h>
+#include <stdbool.h>_
 
 #define MaxData 100
 #define MaxRow 10
@@ -13,6 +13,7 @@ int Data1[MaxData], Data2[MaxData];
 int Radix[MaxRow][MaxCol];
 int N;
 
+// สุ่มข้อมูลแบบ random สำหรับ Bubble Sort, Insertion Sort, Quick Sort, Selection Sort
 void PrepareRawData(int n) {
     int i;
     srand((unsigned int)time(NULL));
@@ -20,6 +21,7 @@ void PrepareRawData(int n) {
         Data[i] = 1 + rand() % 99;
 }
 
+// สุ่มข้อมูลแบบ random สำหรับ Radix Sort โดยให้มีค่าอยู่ในช่วง 100-999
 void PrepareRawDataRadix(int n2) {
     int i;
     srand((unsigned int)time(NULL));
@@ -27,6 +29,7 @@ void PrepareRawDataRadix(int n2) {
         Data[i] = (rand() % 899) + 100;
 }
 
+// สุ่มข้อมูลอันใหม่สำหรับ Heap Sort ลงใน Data1[]
 void PrepareRawDataHeap(int n) {
     int i;
     srand((unsigned int)time(NULL));
@@ -34,6 +37,7 @@ void PrepareRawDataHeap(int n) {
         Data1[i] = 1 + rand() % 99;
 }
 
+// แสดงข้อมูลใน Data[] แบบทั่วไปสำหรับฟังก์ชัน sort อื่น ๆ
 void DispData(int n) {
     int i;
     for(i = 1; i <= n; i++)
@@ -41,6 +45,7 @@ void DispData(int n) {
     printf("\n");
 }
 
+// แสดงข้อมูลใน Data[] แบบ Radix Sort เพื่อดูผลลัพธ์ทีละรอบ
 void DispDataRadix(int n2) {
     int i;
     for (i = 0; i < n2; i++)
@@ -48,12 +53,14 @@ void DispDataRadix(int n2) {
     printf("\n");
 }
 
+// สลับข้อมูล 2 ตำแหน่งใน Data[]
 void swap(int a, int b) {
     int temp = Data[a];
     Data[a] = Data[b];
     Data[b] = temp;
 }
 
+// Bubble Sort: เปรียบเทียบคู่เพื่อนบ้านแล้วสลับถ้าตัวหน้า > ตัวหลัง
 void BubbleSort(int n) {
     int i, j;
     printf("----------------------------------------------------------------\n");
@@ -77,12 +84,14 @@ void BubbleSort(int n) {
     }
 }
 
+// สลับข้อมูล 2 ตัวใน Data2[] สำหรับ Heap Sort
 void swapHeap(int a, int b) {
     int temp = Data2[a];
     Data2[a] = Data2[b];
     Data2[b] = temp;
 }
 
+// แสดงข้อมูลใน heap แบบมีการ highlight ตำแหน่งที่กำลังทำงาน DispDataHeap(Data2, 1, n_heap);
 void DispDataHeap(int DataArr[], int out, int n_val) {
     int i;
     for (i = 1; i <= n_val; i++) {
@@ -94,11 +103,13 @@ void DispDataHeap(int DataArr[], int out, int n_val) {
     printf("\n");
 }
 
+// คืนค่าใหญ่ที่สุดระหว่าง 2 ตัวเลข
 int Maximum(int a, int b) {
     if(a > b) return a;
     else return b;
 }
 
+// ปรับโครงสร้าง heap หลังจากการสลับค่าเพื่อฟื้นฟูคุณสมบัติของ heap
 void AdjustTree(int LastNode, int n_val) {
     int i, Max, lson, rson, son;
     bool result = false;
@@ -139,6 +150,7 @@ void AdjustTree(int LastNode, int n_val) {
     printf("---------------------------------------------------Adjust Tree Finished at N=%d \n", LastNode);
 }
 
+// สร้าง heap tree จากข้อมูลใน Data1[] แล้วจัดเรียงข้อมูลลงใน Data2[]
 void CreateHeapTree(int n_val) {
     int i, j, k, father;
     bool result;
@@ -172,76 +184,96 @@ void CreateHeapTree(int n_val) {
     }
 }
 
+// เรียก Heap Sort แบบครบวงจร: สุ่มข้อมูล -> แสดงข้อมูลดิบ -> สร้าง heap -> เรียง -> แสดงผลสุดท้าย
 void RunHeapSort() {
-    int n_heap = 8;
+    int n_heap = 4; // จำนวนข้อมูลสำหรับตัวอย่าง Heap Sort
     printf("ASCENDING HEAP SORT\n");
     printf("===================================================\n");
-    PrepareRawDataHeap(n_heap);
+    PrepareRawDataHeap(n_heap); // สุ่มข้อมูลบันทึกลง Data1[]
     printf("Raw Data : ");
-    DispDataHeap(Data1, n_heap + 1, n_heap);
+    DispDataHeap(Data1, n_heap + 1, n_heap); // แสดงข้อมูลก่อนเรียง
     printf("---------------------------------------------------Raw Data Finished \n");
     printf("Create Heap Tree...\n");
-    CreateHeapTree(n_heap);
+    CreateHeapTree(n_heap); // สร้าง heap tree และเรียงข้อมูล
     printf("Sorted Data is : ");
-    DispDataHeap(Data2, 1, n_heap);
+    DispDataHeap(Data2, 1, n_heap); // แสดงข้อมูลหลังเรียง
     printf("---------------------------------------------------Sort Finished \n");
 }
 
-void InsertionSort(int n) {
-    int i, j, temp;
-    printf("------------------------------------------------------------\n");
-    printf(" i ");
-    for (i = 1; i <= n; i++)
+// Insertion Sort: ดึงค่าตัวถัดไปมาแทรกไว้ในส่วนที่เรียงแล้ว
+void InsertionSort(int N)
+{
+    int i, j, temp; // i = ตำแหน่งที่กำลังพิจารณา, j = ตำแหน่งที่เลื่อนข้อมูล, temp = ค่าชั่วคราว
+    printf("---------------------------------------------------------------------\n");
+    printf(" i  ");
+    for (i = 1; i <= N; i++)
         printf(" (%2d)", i);
-    printf("\n------------------------------------------------------------\n");
+    printf("\n");
+    printf("---------------------------------------------------------------------\n");
     printf("%2d. ", 0);
-    DispData(n);
+    DispData(N); // แสดงข้อมูลเริ่มต้น
 
-    for (i = 2; i <= n; i++) {
-        temp = Data[i];
-        j = i - 1;
-        while (j >= 1 && Data[j] > temp) {
-            Data[j + 1] = Data[j];
-            j--;
+    for (i = 1; i < N; i++) // วนรอบสำหรับแต่ละข้อมูลที่ต้องแทรก
+    {
+        if (Data[i + 1] < Data[i]) // ถ้าค่าตัวถัดไปน้อยกว่าตัวก่อนหน้า ให้แทรก
+        {
+            temp = Data[i + 1]; // เก็บค่าไว้ก่อนเริ่มย้ายข้อมูล
+            Data[i + 1] = 0;    // ใส่ 0 เพื่อเป็นตำแหน่งว่างสำหรับแทรก
+            j = i; // เริ่มจากตำแหน่งก่อนหน้าที่กำลังพิจารณา
+
+            while (j >= 1 && temp < Data[j]) // เลื่อนค่าที่ใหญ่กว่า temp ไปทางขวา
+            {
+                Data[j + 1] = Data[j]; // เลื่อนข้อมูลที่ใหญ่กว่า temp ไปทางขวา
+                Data[j] = 0; // ทำให้ตำแหน่งเดิมกลายเป็นช่องว่าง
+                printf("%2d. ", i + 1);
+                DispData(N); // แสดงกระบวนการเลื่อนข้อมูล
+                j = j - 1; // ลด j เพื่อดูข้อมูลก่อนหน้าอีกชั้น
+            }
+
+            Data[j + 1] = temp; // ใส่ temp ลงในตำแหน่งสุดท้ายที่ว่าง
+            printf("%2d. ", i + 1);
+            DispData(N); // แสดงข้อมูลหลังจากแทรกเรียบร้อยแล้ว
         }
-        Data[j + 1] = temp;
-        printf("%2d. ", i);
-        DispData(n);
     }
 }
 
+// Quick Sort: ใช้ pivot หลักและแบ่งข้อมูลเป็นสองฝั่งแบบ recursive
 void QuickSort(int f, int r) {
-    int f1 = f, r1 = r;
-    bool direction = true;
+    int f1 = f, r1 = r; // เก็บช่วงเริ่มต้นและช่วงสุดท้ายไว้สำหรับ recursive
+    bool direction = true; // true = เลื่อนไปทางซ้าย, false = เลื่อนไปทางขวา
     while(f != r) {
-        if(Data[f] > Data[r]) {
+        if(Data[f] > Data[r]) { // ถ้าค่าด้านซ้ายมากกว่าด้านขวา ให้สลับ
             printf("%2d %2d : ", f, r);
-            DispData(N);
-            swap(f, r);
+            DispData(N); // แสดงก่อนสลับ
+            swap(f, r); // สลับค่าเมื่อพบคู่ที่ผิดลำดับ
             printf("%2d %2d : ", f, r);
-            DispData(N);
-            direction = !direction;
+            DispData(N); // แสดงหลังสลับ
+            direction = !direction; // เปลี่ยนทิศทางการเคลื่อนค่า
         }
-        if (direction) r--;
-        else f++;
+        if (direction) r--; // ถ้า direction เป็น true ให้ลด r
+        else f++; // ถ้า direction เป็น false ให้เพิ่ม f
     }
-    printf("k1=[%2d]--------------------------------------------------------\n", Data[f]);
-    if((f > f1) && (f - 1 != f1)) QuickSort(f1, f - 1);
-    if((r < r1) && (r + 1 != r1)) QuickSort(r + 1, r1);
+    printf("k1=[%2d]--------------------------------------------------------\n", Data[f]); // แสดง pivot ที่เจอ
+    if((f > f1) && (f - 1 != f1)) QuickSort(f1, f - 1); // เรียงซ้ายก่อน
+    if((r < r1) && (r + 1 != r1)) QuickSort(r + 1, r1); // เรียงขวาหลัง
 }
 
+// เคลียร์ค่าในแต่ละถังของ Radix ก่อนเริ่มรอบใหม่
 void ClearStackPT(void) {
     int i;
     for (i = 0; i <= MaxRow; i++)
         Radix[i][0] = 0;
 }
 
+// ใส่ข้อมูลลงในถังที่ตรงกับหลักที่กำลังพิจารณา
+// เช่น หลักหน่วย = 5 จะไปอยู่ที่ Radix[5]
 void Push(int Rad, int Dat) {
     int SP = Radix[Rad][0] + 1;
     Radix[Rad][0] = SP;
     Radix[Rad][SP] = Dat;
 }
 
+// ดึงข้อมูลกลับจากถัง Radix[0] ถึง Radix[9] แล้วบรรจุกลับไปที่ Data[]
 void ReadStack(void) {
     int i, j, k = 0, SP;
     for (i = 0; i < MaxRow; i++) {
@@ -253,6 +285,7 @@ void ReadStack(void) {
     }
 }
 
+// Radix Sort ทำงานทีละหลักจากหลักหน่วย -> หลักสิบ -> หลักร้อย
 void RadixSortLogic(int n2) {
     int Digit, i, RadixNo, divisor, d;
     for (Digit = 0; Digit < 3; Digit++) {
@@ -270,7 +303,7 @@ void RadixSortLogic(int n2) {
 }
 
 void RunRadixSort() {
-    int n_radix = 16;
+    int n_radix = 4;
     printf("ASCENDING RADIX SORT\n");
     printf("=====================================================================\n");
     PrepareRawDataRadix(n_radix);
@@ -323,9 +356,10 @@ void SelectionSortLogic(int n) {
     }
 }
 
+// โปรแกรมหลัก: แสดงเมนูและเรียกฟังก์ชัน sort ที่เลือก
 int main() {
-    int choice;
-    while(1) {
+    int choice; // ตัวแปรเก็บตัวเลือกเมนู
+    while(1) { // วนลูปจนกว่าจะเลือก 0 เพื่อออก
         printf("\n========================================\n");
         printf("      DATA STRUCTURES & ALGORITHMS      \n");
         printf("========================================\n");
@@ -337,58 +371,58 @@ int main() {
         printf("6. Selection Sort\n");
         printf("0. Exit\n");
         printf("Select an option (0-6): ");
-        if (scanf("%d", &choice) != 1) break;
+        if (scanf("%d", &choice) != 1) break; // ถ้าอ่านค่าไม่ได้ ให้หยุดโปรแกรม
 
-        if(choice == 0) break;
+        if(choice == 0) break; // ออกจากโปรแกรม
 
-        switch(choice) {
+        switch(choice) { // จัดการตามตัวเลือกที่ผู้ใช้กรอก
             case 1:
-                N = 12;
+                N = 4; // กำหนดจำนวนข้อมูลสำหรับ Bubble Sort
                 printf("\nASCENDING BUBBLE SORT\n");
                 printf("================================================================\n");
-                PrepareRawData(N);
-                printf("Raw Data : "); DispData(N);
+                PrepareRawData(N); // สุ่มข้อมูลใน Data[]
+                printf("Raw Data : "); DispData(N); // แสดงข้อมูลเริ่มต้น
                 printf("----------------------------------------------------------------\n");
                 printf("Processing Data...\n");
-                BubbleSort(N);
+                BubbleSort(N); // เรียก Bubble Sort
                 printf("----------------------------------------------------------------\n");
-                printf("Sorted Data : "); DispData(N);
+                printf("Sorted Data : "); DispData(N); // แสดงผลลัพธ์สุดท้าย
                 break;
             case 2:
                 printf("\n");
-                RunHeapSort();
+                RunHeapSort(); // เรียกฟังก์ชัน Heap Sort ครบวงจร
                 break;
             case 3:
-                N = 12;
+                N = 4; // กำหนดจำนวนข้อมูล
                 printf("\nASCENDING INSERTION SORT\n");
                 printf("==============================\n");
-                PrepareRawData(N);
-                printf("Raw Data... "); DispData(N);
+                PrepareRawData(N); // สุ่มข้อมูล
+                printf("Raw Data... "); DispData(N); // แสดงข้อมูลเดิม
                 printf("Processing Data...\n");
-                InsertionSort(N);
+                InsertionSort(N); // เรียก Insertion Sort
                 printf("------------------------------------------------------------\n");
-                printf("Sorted Data : "); DispData(N);
+                printf("Sorted Data : "); DispData(N); // แสดงข้อมูลหลังเรียง
                 break;
             case 4:
-                N = 12;
+                N = 4; // กำหนดจำนวนข้อมูล
                 printf("\nASCENDING QUICK SORT\n");
                 printf("==============================\n");
-                PrepareRawData(N);
-                printf("Raw Data : "); DispData(N);
+                PrepareRawData(N); // สุ่มข้อมูล
+                printf("Raw Data : "); DispData(N); // แสดงข้อมูลเดิม
                 printf("Processing Data...\n");
                 printf(" F R ");
                 for(int i = 1; i <= N; i++) printf(" (%2d)", i);
                 printf("\n");
-                QuickSort(1, N);
+                QuickSort(1, N); // เรียก Quick Sort
                 printf("----------------------------------------------------------------\n");
-                printf("Sorted Data : "); DispData(N);
+                printf("Sorted Data : "); DispData(N); // แสดงข้อมูลหลังเรียง
                 break;
             case 5:
                 printf("\n");
-                RunRadixSort();
+                RunRadixSort(); // เรียก Radix Sort แบบเต็ม
                 break;
             case 6:
-                N = 12;
+                N = 4;
                 printf("\nASCENDING SELECTION SORT\n");
                 printf("=====================================================================\n");
                 PrepareRawData(N);

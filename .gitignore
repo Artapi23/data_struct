@@ -1,0 +1,48 @@
+# Ignore everything by default; only source-code files below are included.
+*
+
+# Keep directories searchable so source files inside them can be included.
+!*/
+
+# C / C++ source code
+!*.c
+!*.h
+!*.cc
+!*.cpp
+!*.cxx
+!*.hpp
+
+# VHDL / Verilog source code
+!*.vhd
+!*.vhdl
+!*.v
+!*.sv
+!*.svh
+
+# Shell scripts
+!*.sh
+
+# Always keep this ignore file
+!.gitignore
+
+# Common generated/build files (also protects tracked candidates when re-added)
+*.exe
+*.o
+*.obj
+*.out
+*.a
+*.so
+*.dll
+*.vcd
+*.ghw
+*.cf
+work/
+work-*/
+
+# Editor / OS files
+.vscode/
+.idea/
+.vs/
+.DS_Store
+Thumbs.db
+tempCodeRunnerFile.*
